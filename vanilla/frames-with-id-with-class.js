@@ -1,16 +1,31 @@
 // http://the-internet.herokuapp.com/iframe
+class MyBrowser {
+  static switchToFrame(frameId) {
+    this.frameId = frameId;
+    return document.querySelector(this.frameId).contentDocument;
+  }
 
-switchToFrame = (frameId) => {
-  return document.querySelector(frameId).contentDocument;
-};
+  static getElement(selector) {
+    return this.switchToFrame(this.frameId).querySelector(selector);
+  }
+}
 
-getElement = (frameId, selector) => {
-  return switchToFrame(frameId).querySelector(selector);
-};
-
-let p1 = getElement("#mce_0_ifr", "p");
-let p2 = getElement("#mce_0_ifr", "p:nth-child(2)");
+const theFrame = MyBrowser.switchToFrame("#mce_0_ifr");
+const p1 = MyBrowser.getElement("p");
+const p2 = MyBrowser.getElement("p:nth-child(2)");
 p2.textContent = "This is assignment test";
+
+// =============================
+
+// constructor(frameId) {
+//   this.frameId = frameId;
+// }
+
+// =============================
+
+// let p1 = getElement("#mce_0_ifr", "p");
+// let p2 = getElement("#mce_0_ifr", "p:nth-child(2)");
+// p2.textContent = "This is assignment test";
 
 // =============================
 
